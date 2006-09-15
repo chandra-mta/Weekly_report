@@ -14,6 +14,7 @@
 #                  will indicate 'Problem' if ACA must use bad mp_report
 #
 #     !!  must be run on colossus or rhodes !!
+#         must be run in ciao environment (calls dmkeypar)
 
 if ( $#ARGV != 1 ) {
   print "Usage:\n\t$0 <ndays> <outfile>\n";
