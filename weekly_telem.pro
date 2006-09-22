@@ -17,7 +17,7 @@ while (date le tstop) do begin
   ;print,"x"+date_str+"x" ; debug
   ;files=file_search('/data/mta/www/mp_reports/'+date_str+'20060620/*/data/*_summ.fits')
   ;files=findfile('/data/mta/www/mp_reports/'+date_str+'/*/data/*_summ.fits')
-  files=findfile('/data/mta/www/ap_report/'+date_str+'/*/data/*_summ.fits')
+  files=findfile('/data/mta/www/ap_report/'+date_str+'/*/data/*_summ.fits*')
   ;files=find_file('/data/mta/www/mp_reports/20060618/*/data/*_summ.fits')
   if (n_elements(files) gt 1) then begin
     for ifiles=0, n_elements(files)-1 do begin
