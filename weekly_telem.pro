@@ -32,13 +32,14 @@ while (date le tstop) do begin
           ;print, telem(itelem).name,telem(itelem).max,bnum
           if (bnum eq 1) then begin
             viol=telem(itelem).max
-            lim = limits(telem(itelem).name,describe=des,unit=units)
+            lim = limits(name,describe=des,unit=units)
             lim_db=lim(n_elements(lim)-1)
             if (viol gt lim_db.yel_hi) then begin
               maxarr(day,b(0))=string(viol,format='(F7.2)')
               maxarr(8,b(0))=1
             endif
             viol=telem(itelem).min
+print,name,viol,lim_db.yel_lo
             if (viol lt lim_db.yel_lo) then begin
               minarr(day,b(0))=string(viol,format='(F7.2)')
               minarr(8,b(0))=1
@@ -50,7 +51,7 @@ while (date le tstop) do begin
   endif ; if (n_elements(files) gt 1) then begin
   date=date+1
   day=day+1
-  if (date eq 20060732) then date=20060801
+  if (date eq 20060931) then date=20061001
 endwhile ; while (date le tstop) do begin
 
 ;print,maxarr
@@ -58,7 +59,7 @@ endwhile ; while (date le tstop) do begin
 ;print,maxarr(0,9)
 openw,OUNIT,outfile,/get_lun
 for iout=0,n_elements(maxarr(0,*))-1 do begin
-  if (maxarr(8,iout) eq 1) then begin
+  if (maxarr(8,iout) eq 1 or minarr(8,iout) eq 1) then begin
     b=where(maxarr(*,iout) eq "", bnum)
     if (bnum ge 1) then maxarr(b,iout)="x"
     b=where(minarr(*,iout) eq "", bnum)

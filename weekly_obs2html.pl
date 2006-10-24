@@ -52,6 +52,7 @@ for ($ifiles=0;$ifiles<$#new_files;$ifiles++) {
     next;
   }
   chomp $fits[0];
+print "$fits[0]\n";
   push(@index,$ifiles);
   push(@obsid,$obsid);
   push(@det,`dmkeypar $fits[0] DETNAM echo+`);
@@ -61,6 +62,7 @@ for ($ifiles=0;$ifiles<$#new_files;$ifiles++) {
   push(@obj,`dmkeypar $fits[0] OBJECT echo+`);
   push(@tstart,`dmkeypar $fits[0] TSTART echo+`);
   $observer=`dmkeypar $fits[0] OBSERVER echo+`;
+print "$observer[$ifiles]\n";
   if ($observer =~ m/Calibration/) {
     push(@type,"CAL");
   } else {
@@ -119,7 +121,7 @@ for ($iobs=0;$iobs<=$#obsid;$iobs++) {
   print outfile "<td>$gratp[$iobs]</td>\n"; #GRATING
   print outfile "<td align=left>$obj[$iobs]</td>\n"; #TARGET
 
-  if ($inst eq 'acis') {
+  if ($inst[$iobs] eq 'acis') {
   # select ap output first, mp output if it ap doesn't exist
     if (-s "/data/mta/www/ap_report/events/acis/$obsid[$iobs]/event.html") {
       print outfile "<td><a href=\"/mta_days/ap_report/events/acis/$obsid[$iobs]/event.html\">$type[$iobs]</a>"; #ACIS ANALYSIS
@@ -131,7 +133,7 @@ for ($iobs=0;$iobs<=$#obsid;$iobs++) {
       }
     }
   }
-  if ($inst eq 'hrc') {
+  if ($inst[$iobs] eq 'hrc') {
     if (-s "/data/mta/www/ap_report/events/hrc/$obsid[$iobs]/event.html") {
       print outfile "<td><a href=\"/mta_days/ap_report/events/hrc/$obsid[$iobs]/event.html\">$type[$iobs]</a>"; #HRC ANALYSIS
     } else {
