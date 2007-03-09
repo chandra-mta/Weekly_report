@@ -51,7 +51,7 @@ print,name,viol,lim_db.yel_lo
   endif ; if (n_elements(files) gt 1) then begin
   date=date+1
   day=day+1
-  if (date eq 20060931) then date=20061001
+  if (date eq 20070229) then date=20070301
 endwhile ; while (date le tstop) do begin
 
 ;print,maxarr

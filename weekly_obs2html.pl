@@ -14,7 +14,6 @@
 #                  will indicate 'Problem' if ACA must use bad mp_report
 #
 #     !!  must be run on colossus or rhodes !!
-#         must be run in ciao environment (calls dmkeypar)
 
 if ( $#ARGV != 1 ) {
   print "Usage:\n\t$0 <ndays> <outfile>\n";
@@ -43,6 +42,7 @@ print "$#new_files new observations\n";
 
 for ($ifiles=0;$ifiles<$#new_files;$ifiles++) {
   chomp $new_files[$ifiles];
+  #print "$new_files[$ifiles]\n";
   @line=split(/\//,$new_files[$ifiles]);
   $obsid=$line[7];
   $inst=$line[6];
@@ -52,8 +52,9 @@ for ($ifiles=0;$ifiles<$#new_files;$ifiles++) {
     next;
   }
   chomp $fits[0];
-print "$fits[0]\n";
+  #print "$fits[0]\n";
   push(@index,$ifiles);
+  push(@inst,$inst);
   push(@obsid,$obsid);
   push(@det,`dmkeypar $fits[0] DETNAM echo+`);
   $gratp = `dmkeypar $fits[0] GRATING echo+`;
@@ -62,7 +63,6 @@ print "$fits[0]\n";
   push(@obj,`dmkeypar $fits[0] OBJECT echo+`);
   push(@tstart,`dmkeypar $fits[0] TSTART echo+`);
   $observer=`dmkeypar $fits[0] OBSERVER echo+`;
-print "$observer[$ifiles]\n";
   if ($observer =~ m/Calibration/) {
     push(@type,"CAL");
   } else {
@@ -88,7 +88,8 @@ print "$observer[$ifiles]\n";
     if ($#gdirs ge 5) {
       push(@gratpath,sprintf "\n/<a href=\"/mta_days/mta_grat/$gdirs[5]/$obs/obsid_$obs\_Sky_summary.html\">/Grat</a>"); # gratings analysis
     } else { # grat anal not yet available
-      push(@gratpath,"\n/Not yet avail.");
+      #push(@gratpath,"\n/Not yet avail.");
+      push(@gratpath,"\n");
     }
   } else { 
       push(@gratpath,"");
