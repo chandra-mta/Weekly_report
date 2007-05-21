@@ -88,8 +88,16 @@ for ($ifiles=0;$ifiles<$#new_files;$ifiles++) {
     if ($#gdirs ge 5) {
       push(@gratpath,sprintf "\n/<a href=\"/mta_days/mta_grat/$gdirs[5]/$obs/obsid_$obs\_Sky_summary.html\">/Grat</a>"); # gratings analysis
     } else { # grat anal not yet available
-      #push(@gratpath,"\n/Not yet avail.");
-      push(@gratpath,"\n");
+      if (-s "/data/mta/www/ap_report/events/gratings/$obsid[$iobs]/mta_grat.html") {
+        print outfile "<td><a href=\"/mta_days/ap_report/events/gratings/$obsid[$iobs]/mta_grat.html\">$type[$iobs]</a>"; #ACIS ANALYSIS
+      } else {
+        if (-s "/data/mta/www/mp_reports/events/gratings/$obsid[$iobs]/mta_grat.html") {
+          print outfile "<td><a href=\"/mta_days/mp_reports/events/gratings/$obsid[$iobs]/mta_grat.html\">$type[$iobs]</a>"; #ACIS ANALYSIS
+        } else {
+          print outfile "\n/Missing";
+          #push(@gratpath,"\n/Not yet avail.");
+        }
+      }
     }
   } else { 
       push(@gratpath,"");

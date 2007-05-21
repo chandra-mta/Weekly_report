@@ -10,7 +10,7 @@ maxarr(8,*)=0 ; mark all as no violations found yet
 maxarr(0,*)=msids 
 minarr=maxarr
 
-date=tstart
+date=long(tstart)
 day=1
 while (date le tstop) do begin
   date_str=strcompress(string(date),/remove_all)
@@ -51,6 +51,7 @@ print,name,viol,lim_db.yel_lo
   endif ; if (n_elements(files) gt 1) then begin
   date=date+1
   day=day+1
+print,date," ***********************************"
   if (date eq 20070229) then date=20070301
 endwhile ; while (date le tstop) do begin
 
