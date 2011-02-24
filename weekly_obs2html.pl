@@ -25,15 +25,17 @@ open outfile, ">$ARGV[1]";
 my $tmpfile = "xxxobsxxx.tmp";
 
 print outfile "<table border=0 width=100%>\n";
-print outfile "<tr><th><u>OBSID</u></th>\n";
-print outfile "    <th><u>DETECTOR</u></th>\n";
-print outfile "    <th><u>GRATING</u></th>\n";
-print outfile "    <th align=left><u>TARGET</u></th>\n";
-print outfile "    <th><u>ANALYSIS</u></th>\n";
-print outfile "    <th><u>ACA</u></th></tr>\n";
+print outfile "<tr><th class='uline'>OBSID</th>\n";
+print outfile "    <th class='uline'>DETECTOR</th>\n";
+print outfile "    <th class='uline'>GRATING</th>\n";
+print outfile "    <th class='uline' style='text=align:left'>TARGET</th>\n";
+print outfile "    <th class='uline'>ANALYSIS</th>\n";
+print outfile "    <th class='uline'>ACA</th></tr>\n";
 print outfile "\n";
 
-@new_files=`find /data/mta/www/mp_reports/events/*/*/event.html -mtime -$ndays`;
+#@new_files=`find /data/mta/www/mp_reports/events/*/*/event.html -mtime -$ndays`;
+@new_files=`find /data/mta/www/mp_reports/events/*/*/*sky_bl256_img.fits -mtime -$ndays`;
+#@new_files=`ls -lrt /data/mta/www/mp_reports/events/*/*/event.html | awk '{print $9}'`;
 if ($new_files[0] =~ m/No match/) {
   print "No new observations found posted in the past $ndays days.\n";
   die;

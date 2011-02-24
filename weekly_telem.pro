@@ -16,8 +16,8 @@ while (date le tstop) do begin
   date_str=strcompress(string(date),/remove_all)
   ;print,"x"+date_str+"x" ; debug
   ;files=file_search('/data/mta/www/mp_reports/'+date_str+'20060620/*/data/*_summ.fits')
-  ;files=findfile('/data/mta/www/mp_reports/'+date_str+'/*/data/*_summ.fits')
-  files=findfile('/data/mta/www/ap_report/'+date_str+'/*/data/*_summ.fits*')
+  files=findfile('/data/mta/www/mp_reports/'+date_str+'/*/data/*_summ.fits*')
+  ;files=findfile('/data/mta/www/ap_report/'+date_str+'/*/data/*_summ.fits*')
   ;files=find_file('/data/mta/www/mp_reports/20060618/*/data/*_summ.fits')
   if (n_elements(files) gt 1) then begin
     for ifiles=0, n_elements(files)-1 do begin
@@ -39,7 +39,7 @@ while (date le tstop) do begin
               maxarr(8,b(0))=1
             endif
             viol=telem(itelem).min
-print,name,viol,lim_db.yel_lo
+if (name eq 'AWD3TQI') then print,files(ifiles),name,viol,lim_db.yel_lo
             if (viol lt lim_db.yel_lo) then begin
               minarr(day,b(0))=string(viol,format='(F7.2)')
               minarr(8,b(0))=1
@@ -52,7 +52,7 @@ print,name,viol,lim_db.yel_lo
   date=date+1
   day=day+1
 print,date," ***********************************"
-  if (date eq 20070229) then date=20070301
+  if (date eq 20110132) then date=20110201
 endwhile ; while (date le tstop) do begin
 
 ;print,maxarr
