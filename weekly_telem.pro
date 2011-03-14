@@ -52,7 +52,7 @@ if (name eq 'AWD3TQI') then print,files(ifiles),name,viol,lim_db.yel_lo
   date=date+1
   day=day+1
 print,date," ***********************************"
-  if (date eq 20110132) then date=20110201
+  if (date eq 20110229) then date=20110301
 endwhile ; while (date le tstop) do begin
 
 ;print,maxarr
