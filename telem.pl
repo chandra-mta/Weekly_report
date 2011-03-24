@@ -4,7 +4,7 @@
 # BDS 21 mar 2003
 # BDS 15 jul 2003
 
-$recfile="track.tab"; # tab of record highs and lows, 
+$recfile="/data/mta4/MTA/data/Weekly/track.tab"; # tab of record highs and lows, 
                       #  maybe it should be user-named - later
 
 $PROGRAM_NAME=$0;
@@ -71,6 +71,7 @@ print OUT "<td><em class='red'>red limits<br />(lower)<br />upper</em>\n";
 print OUT "<td>Units <td>Description\n";
 
 while ($inline=<IN>) {
+  $printline=0;
   chomp $inline;
   @line=split(/\s+\|\s+/,$inline);
   #print @line; #degug
@@ -89,9 +90,9 @@ while ($inline=<IN>) {
   }
 
   if (defined $msid{"$line[0]"}) {
-    print OUT "<tr><td>$line[0]\n";
+    $outline="<tr><td>$line[0]\n";
   } else { # mark new msid
-    print OUT "<tr><td class=newlim>$line[0]\n";
+    $outline="<tr><td class=newlim>$line[0]\n";
     print "New msid $line[0]\n";
   } # if (defined $msid{"$line[0]"}) {
 
@@ -168,20 +169,23 @@ while ($inline=<IN>) {
       }  # else # if (defined $msid{"line[0]"}) {
       if ($rec_check eq "low") {
         print OUT "$tdtag <em class='$rec_color'>($line[$i])</em></td>\n";
+        $printline=1;
       } else {
         if ($rec_check eq "high") {
-          print OUT "$tdtag <em class='$rec_color'>$line[$i]</em></td>\n";
+          $outline.="$tdtag <em class='$rec_color'>$line[$i]</em></td>\n";
+          $printline=1;
         } else {
-          print OUT "$tdtag <em class='white'>&#160</em></td>\n";
+          $outline.="$tdtag <em class='white'>&#160</em></td>\n";
         } # if ($rec_check eq "high") {
       } # if ($rec_check eq "low") {
     } else {
-      print OUT "<td>&#160</td>\n";
+      $outline.="<td>&#160</td>\n";
     }  # if ($line[$i] ne " ") {
   }  #for $i=1 ; $i<=$#line ; $i++ {
-  print OUT "<td>($limit[1])<br />$limit[2]</td><td>($limit[3])<br />$limit[4]</td>\n";
-  print OUT "<td>$limit[$#limit-1] </td><td>$describe</td>\n";
-  print OUT "</tr>\n";
+  $outline.="<td>($limit[1])<br />$limit[2]</td><td>($limit[3])<br />$limit[4]</td>\n";
+  $outline.="<td>$limit[$#limit-1] </td><td>$describe</td>\n";
+  $outline.="</tr>\n";
+  if ($printline) {print OUT $outline;}
 }
 print OUT "</table>\n";
 close OUT;

@@ -5,7 +5,7 @@ TASK = Snapshot
 
 include /data/mta4/MTA/include/Makefile.MTA
 
-BIN  = weekly_obs2html.pl
+BIN  = weekly_obs2html.pl telem.pl
 IDL_LIB = weekly_telem.pro
 
 install:
