@@ -168,7 +168,7 @@ while ($inline=<IN>) {
         } # foreach $head (keys(%h)) {
       }  # else # if (defined $msid{"line[0]"}) {
       if ($rec_check eq "low") {
-        print OUT "$tdtag <em class='$rec_color'>($line[$i])</em></td>\n";
+        $outline.="$tdtag <em class='$rec_color'>($line[$i])</em></td>\n";
         $printline=1;
       } else {
         if ($rec_check eq "high") {
