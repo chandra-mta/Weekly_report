@@ -15,6 +15,8 @@ endif
 ifdef DATA
 	mkdir -p $(INSTALL_DATA)
 	rsync --times --cvs-exclude $(DATA) $(INSTALL_DATA)/
+    chgrp mtagroup $(INSTALL_DATA)/*
+    chmod g+w $(INSTALL_DATA)/*
 endif
 ifdef DOC
 	mkdir -p $(INSTALL_DOC)

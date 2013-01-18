@@ -240,6 +240,7 @@ sub read_recfile {
     } # foreach (@hdr) {
     $elem++;
   } # while ($inline=<TAB>) {  # fill in the rest of the hash
+  close TAB;
   return %viol;
 } 
 
