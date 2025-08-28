@@ -1,2 +1,4 @@
 These are scripts to create the MTA weekly report.
 They create the telemetry and recent observations sections of the report.
+
+ARCHIVE NOTE: This version of the MTA weekly report generating scripts are no longer in use. Consult the mta-reports git repo for current report scripts.
